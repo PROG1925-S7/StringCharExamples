@@ -18,7 +18,10 @@ namespace StringCharExamples
     {
         static void Main(string[] args)
         {
-            StringAndChars();
+            //StringAndChars();
+            //SearchingStrings();
+            //SubstringExamples();
+            DelimsTokens();
 
             Console.ReadKey();
         }
@@ -70,7 +73,7 @@ namespace StringCharExamples
             Console.WriteLine(letter);
 
             //4. Determine what 'type' a character is
-            
+
             if (char.IsLetter(letter))
             {
                 Console.WriteLine($"{letter} is a letter");
@@ -98,6 +101,116 @@ namespace StringCharExamples
                 Console.WriteLine($"{letter} is a not punctuation");
             }
 
+        }
+
+        static void SearchingStrings()
+        {
+            string testString, substringValue;
+            int index;
+
+            //1. Search for a string inside another string
+
+            Console.WriteLine("Enter your class code: ");
+            testString = Console.ReadLine();
+
+            if (testString.Contains("PROG"))
+            {
+                Console.WriteLine("This is a programming class");
+            }
+            else
+            {
+                Console.WriteLine("This is not a programming class");
+            }
+
+            //2. Find where a character is in a string
+            index = testString.IndexOf("P");
+
+            Console.WriteLine(index);
+
+            if (index >= 0 )
+            {
+                Console.WriteLine($"character P was at index {index}");
+            }
+            else
+            {
+                Console.WriteLine("Character not found");
+            }
+
+            //3. Find where a string is in a string
+            testString = "xx oo xx oo";
+            substringValue = "xx";
+
+            index = testString.IndexOf(substringValue);
+            Console.WriteLine(index);
+
+            index = testString.IndexOf("xx", index + substringValue.Length);
+            Console.WriteLine(index);
+
+        }
+
+        static void SubstringExamples()
+        {
+            string testString = "New York";
+            string substringValue;
+
+            //1. Insert a string into a string
+            testString = testString.Insert(3, "ish");
+            Console.WriteLine(testString);
+
+            //2. Remove a string from a string
+            testString = testString.Remove(0, 7); 
+            Console.WriteLine(testString);
+
+            //3. Get a part of a string, (a substring), from a string
+            testString = "Conestoga College Waterloo";
+            substringValue = testString.Substring(18, 8);
+            substringValue = testString.Substring(testString.LastIndexOf(" ")+1);
+
+
+            Console.WriteLine(testString);
+            Console.WriteLine(substringValue);
+ 
+        }
+
+        static void DelimsTokens()
+        {
+            string testString = "tony,ari,angela";
+            string[] tokens;
+
+            tokens = testString.Split(',');
+
+            foreach (string s in tokens)
+            {
+                Console.WriteLine(s);
+            }
+
+            testString = "Toronto Maple Leafs";
+
+            tokens = testString.Split(' ');
+
+            foreach (string s in tokens)
+            {
+                Console.WriteLine(s);
+            }
+
+            testString = "tony ari,angela:john";
+
+            tokens = testString.Split(' ', ',', ':');
+
+            foreach (string s in tokens)
+            {
+                Console.WriteLine(s);
+            }
+
+            for(int i = 0; i< tokens.Length; i++) 
+            {
+                tokens[i] = char.ToUpper(tokens[i][0]) + tokens[i].Substring(1);
+            }
+
+            foreach (string s in tokens)
+            {
+                Console.WriteLine(s);
+            }
         }
     }
 }
